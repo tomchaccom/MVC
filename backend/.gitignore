@@ -1,3 +1,13 @@
+# IntelliJ & MacOS
 .idea
 .DS_Store
 
+# Build & Gradle
+.gradle/
+build/
+
+# Ignore temp files
+*.properties
+*.bin
+*.lock
+*.xml
