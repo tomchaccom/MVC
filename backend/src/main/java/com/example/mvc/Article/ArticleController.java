@@ -1,5 +1,6 @@
 package com.example.mvc.Article;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +22,14 @@ public class ArticleController {
 
     // 작성 폼
     @GetMapping("/new")
-    public String newForm(Model model) {
-        model.addAttribute("article", new Article());
+    public String newForm(@ModelAttribute("articleForm") ArticleForm articleForm) {
         return "new";
     }
 
     // 글 저장
     @PostMapping("/new")
-    public String create(@ModelAttribute Article article) {
-        articleRepository.save(article);
+    public String create(@ModelAttribute("articleForm") ArticleForm form) {
+        articleRepository.save(form.toEntity());
         return "redirect:/articles";
     }
 
@@ -45,19 +45,17 @@ public class ArticleController {
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
         Article article = articleRepository.findById(id).orElseThrow();
-        model.addAttribute("article", article);
+        ArticleForm form = new ArticleForm(article.getTitle(), article.getContent(), article.getAuthor());
+        model.addAttribute("articleForm", form);
+        model.addAttribute("id", article.getId());
         return "edit";
     }
 
     // 글 수정
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable Long id, @ModelAttribute Article form) {
-        Article article = articleRepository.findById(id).orElseThrow();
-        article.setTitle(form.getTitle());
-        article.setContent(form.getContent());
-        article.setAuthor(form.getAuthor());
-        articleRepository.save(article);
-
+    public String update(@PathVariable Long id, @ModelAttribute("articleForm") ArticleForm form) {
+        Article updatedArticle = form.toEntity(id);
+        articleRepository.save(updatedArticle);
         return "redirect:/articles/" + id;
     }
 

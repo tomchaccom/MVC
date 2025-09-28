@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>새 글 작성</h1>
-<form th:action="@{/articles/new}" th:object="${article}" method="post">
+<form th:action="@{/articles/new}" th:object="${articleForm}" method="post">
   제목: <input type="text" th:field="*{title}"><br>
   내용: <textarea th:field="*{content}"></textarea><br>
   작성자: <input type="text" th:field="*{author}"><br>
