@@ -4,6 +4,7 @@
     import lombok.AllArgsConstructor;
     import lombok.Getter;
     import lombok.NoArgsConstructor;
+    import lombok.Setter;
 
     import java.time.LocalDateTime;
 
@@ -15,7 +16,6 @@
 
     @Entity
     @NoArgsConstructor
-    @AllArgsConstructor
     @Getter
     public class Article {
 
@@ -34,4 +34,17 @@
             this.createdAt = LocalDateTime.now();
         }
         // @PerPersist를 사용하면 정확하게 DB에 저장되는 시점으로 createdAt이 저장, 객체의 생성 시점과는 다름
+
+        public Article(String title, String content, String author) {
+            this.title = title;
+            this.content = content;
+            this.author = author;
+        }
+
+        public Article(Long id, String title, String content, String author) {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.author = author;
+        }
     }
