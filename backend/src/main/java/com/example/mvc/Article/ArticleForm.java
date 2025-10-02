@@ -14,13 +14,6 @@ public class ArticleForm {
     private String content;
     private String author;
 
-    public ArticleForm(Long id, String title, String content, String author) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
-
 
     public ArticleForm(String title, String content, String author) {
         this.title = title;
