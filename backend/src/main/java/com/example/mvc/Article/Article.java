@@ -27,6 +27,7 @@
         private String content;
         private String author;
 
+
         @Column(updatable = false)
         private LocalDateTime createdAt;
 
@@ -35,7 +36,6 @@
             this.createdAt = LocalDateTime.now();
         }
         // @PerPersist를 사용하면 정확하게 DB에 저장되는 시점으로 createdAt이 저장, 객체의 생성 시점과는 다름
-
 
         public Article(String title, String content, String author) {
             this.title = title;
